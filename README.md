@@ -4,11 +4,11 @@ Project codename for YorkU Hacks 2018. A database for volunteers and recruiters 
 
 ### Collaborators
 
-Jean-Louis Haywood
-Anson Chow
-Dario Tao
-Khalid Ahmed
-Praveen Harris
+* Jean-Louis Haywood
+* Anson Chow
+* Dario Tao
+* Khalid Ahmed
+* Praveen Harris
 
 Preliminary information
 ---------------------------
@@ -27,11 +27,11 @@ Preliminary information
 
 Recruiter event info
 
-Organization
-Location
-Category
-Time
-Contact
+* Organization
+* Location
+* Category
+* Time
+* Contact
 
 
 
