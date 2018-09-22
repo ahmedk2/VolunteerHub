@@ -2,7 +2,7 @@
 
 Project codename for YorkU Hacks 2018. A database for volunteers and recruiters and their events.
 
-## Collaborators;
+### Collaborators
 
 Jean-Louis Haywood
 Anson Chow
@@ -13,7 +13,7 @@ Praveen Harris
 Preliminary information
 ---------------------------
 
-## Process
+### Process
 
 1. Recruiter event info is written up.
 2. Volunteer signs up
@@ -23,9 +23,9 @@ Preliminary information
 6. After event, the event is listed under "past events" with list of volunteer retained.
 7. Record of event attendance can be referenced for the volunteer's resumes as public record.
 
-## Data required
+### Data required
 
-Recruiter event info:
+Recruiter event info
 
 Organization
 Location
