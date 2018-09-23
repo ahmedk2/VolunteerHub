@@ -4,6 +4,6 @@ import java.util.List;
 
 public class VolunteerEventLists
 {
-    List<EmployerEventInfo> futureEvents;
-    List<EmployerEventInfo> pastEvents;
+    private List<RecruiterEventInfo> futureEvents;
+    private List<RecruiterEventInfo> pastEvents;
 }

@@ -5,6 +5,6 @@ import java.util.Map;
 
 public class EventVolunteers
 {
-    Map<EmployerEventInfo, List<VolunteerProfile>> futureEventVolunteers;
-    Map<EmployerEventInfo, List<VolunteerProfile>> pastEventVolunteers;
+    private Map<RecruiterEventInfo, List<VolunteerSelection>> futureEventVolunteers;
+    private Map<RecruiterEventInfo, List<VolunteerSelection>> pastEventVolunteers;
 }

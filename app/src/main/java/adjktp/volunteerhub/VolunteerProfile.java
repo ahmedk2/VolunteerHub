@@ -1,10 +1,12 @@
 package adjktp.volunteerhub;
 
+import java.lang.String;
+
 public class VolunteerProfile
 {
-    private string name;
+    private String name;
     private int age;
-    private string skills;
-    private string city;
-    private string gender;
+    private String skills;
+    private String city;
+    private String gender;
 }
