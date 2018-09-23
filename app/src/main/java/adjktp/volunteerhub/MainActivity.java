@@ -1,15 +1,18 @@
 package adjktp.volunteerhub;
 
+import android.database.sqlite.SQLiteConstraintException;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
 import adjktp.volunteerhub.Adapters.FragmentAdapter;
+import adjktp.volunteerhub.SQLiteFiles.DatabaseHelper;
+import adjktp.volunteerhub.SQLiteFiles.LocalStorageDB;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private ViewPager mViewPager;
     private FragmentAdapter mFragmentAdapter;
@@ -68,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
         });
         mViewPager.setCurrentItem(1);
 
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        long id = dbhelper.insertValue("userIsVolunteer", "1");
+        if (id <= 0) {
+            Log.e("sdsd", " INSERTION FAIL");
+        } else {
+            Log.e("sdsd", " INSERTION SUCCESS");
+        }
+
+        Log.e("should be 1", ""+dbhelper.getValue("userIsVolunteer"));
+        dbhelper.updateValue("userIsVolunteer", "0");
+        Log.e("should be 0", ""+dbhelper.getValue("userIsVolunteer"));
 
     }
 
