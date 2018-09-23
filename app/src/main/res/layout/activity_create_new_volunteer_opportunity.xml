@@ -28,11 +28,12 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Location "/>
+        android:text="Position"/>
 
     <EditText
+        android:id="@+id/etPosition"
         android:gravity="center"
-        android:text="89 Golden Avenue, Toronto, On"
+        android:text="UI developer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -41,14 +42,66 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date (dd/mm/yyyy) "/>
+        android:text="Location "/>
 
     <EditText
+        android:id="@+id/etLocation"
         android:gravity="center"
-        android:text="12/12/1998"
+        android:text="89 Golden Avenue, Toronto, On"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date (dd/mm/yyyy) "/>
+
+            <EditText
+                android:id="@+id/etDate"
+                android:gravity="center"
+                android:text="12/12/2019"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duration (in hrs)"/>
+
+            <EditText
+                android:gravity="center"
+                android:text="3"
+                android:id="@+id/etDuration"
+                android:inputType="time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,12 +141,12 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Duration (in hrs)"/>
+                android:text="Volunteers needed"/>
 
             <EditText
                 android:gravity="center"
-                android:text="3"
-                android:id="@+id/etDuration"
+                android:text="100"
+                android:id="@+id/etNumberOFAttending"
                 android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,10 +176,9 @@
         android:layout_height="wrap_content"
         android:text="Skills Looking for..."/>
 
-
     <EditText
         android:text="Good team work skills"
-        android:id="@+id/etSkills"
+        android:id="@+id/etSkillsInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -143,11 +195,13 @@
             android:layout_centerHorizontal="true">
 
             <LinearLayout
+                android:id="@+id/btnPostVolunteerEvent"
                 android:orientation="horizontal"
                 android:layout_width="110dp"
                 android:layout_height="50dp">
 
                 <TextView
+                    android:id="@id/btnPostVolunteerEvent"
                     android:paddingLeft="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -156,6 +210,7 @@
                     android:textSize="18sp"/>
 
                 <ImageView
+                    android:id="@id/btnPostVolunteerEvent"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"

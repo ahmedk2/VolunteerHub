@@ -1,8 +1,10 @@
 package adjktp.volunteerhub.CustomObjectClasses;
 
+import java.util.UUID;
+
 public class VolunteerOpportunity {
 
-    private String mEventName, mPosition, mCompanyName, mLocation, mJobDescription, mDate;
+    private String mUUID, mEventName, mPosition, mCompanyName, mLocation, mJobDescription, mDate, mStartTime, mSkillsNeeded;
     private double mDuration;
     private int mAttended, mNumberOfAttendees;
 
@@ -15,7 +17,8 @@ public class VolunteerOpportunity {
 
     public VolunteerOpportunity() { }
 
-    public VolunteerOpportunity(String eventName, String position, double duration, String date,String companyName, String location, String jobDescription, int attended, int numberOfAttendees) {
+    public VolunteerOpportunity(String uuid, String companyName, String eventName, String position, String location, double duration, String date, int numberOfAttendees, String mStartTime, String jobDescription, String skillsNeeded, int attended) {
+        mUUID = uuid;
         mEventName = eventName;
         mPosition = position;
         mDuration = duration;
@@ -24,6 +27,8 @@ public class VolunteerOpportunity {
         mLocation = location;
         mJobDescription = jobDescription;
         mAttended = attended;
+        mSkillsNeeded= skillsNeeded;
+
         mNumberOfAttendees = numberOfAttendees;
     }
 
@@ -110,9 +115,33 @@ public class VolunteerOpportunity {
     public void setNumberOfAttendees(int numberOfAttendees) {
         mNumberOfAttendees = numberOfAttendees;
     }
-
-    public int getNumberOfattendees() {
+    public int getNumberOfAttendees() {
         return mNumberOfAttendees;
+    }
+
+    public void setUUID(String uuid) {
+        mUUID = uuid;
+    }
+
+    public String getUUID() {
+        return mUUID;
+    }
+
+    public String getSkillsNeeded() {
+        return mSkillsNeeded;
+    }
+
+    public void setmSkillsNeeded(String mSkillsNeeded) {
+        this.mSkillsNeeded = mSkillsNeeded;
+    }
+
+
+    public String getStartTime() {
+        return mStartTime;
+    }
+
+    public void setStartTime(String mStartTime) {
+        this.mStartTime = mStartTime;
     }
 }
 

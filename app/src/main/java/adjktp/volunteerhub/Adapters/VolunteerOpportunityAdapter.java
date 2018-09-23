@@ -55,7 +55,7 @@ public class VolunteerOpportunityAdapter extends ArrayAdapter {
             Random random = new Random();
             ((TextView) convertView.findViewById(R.id.tvBigLeft)).setText(currentOpportunity.getEventName());
             ((TextView) convertView.findViewById(R.id.tvSmallLeft)).setText(currentOpportunity.getDate());
-            ((TextView) convertView.findViewById(R.id.tvSmallRightTop)).setText(currentOpportunity.getNumberOfattendees() + "/"+ random.nextInt(500) + " attended");
+            ((TextView) convertView.findViewById(R.id.tvSmallRightTop)).setText(currentOpportunity.getNumberOfAttendees() + "/"+ random.nextInt(500) + " attended");
             if (currentOpportunity.getAttended() == 1) {
                 ((TextView) convertView.findViewById(R.id.tvSmallRightBottom)).setText("Hosted");
             } else if (currentOpportunity.getAttended() == 0) {
