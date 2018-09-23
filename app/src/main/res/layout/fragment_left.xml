@@ -3,7 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.LeftFragment">
+    tools:context=".Fragments.LeftFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/btnPastEvents"
+            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_past_events_black_24dp"/>
+
+        <ImageView
+            android:id="@+id/btnFutureEvents"
+            android:layout_margin="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_future_events_black_24dp"/>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvPastOpportunitiesList"
