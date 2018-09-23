@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHelper dbhelper = new DatabaseHelper(getApplicationContext());
         dbhelper.insertValue("userIsVolunteer", "0");
+        dbhelper.updateValue("userIsVolunteer", "1");
 
 
         // make app fullscreen
@@ -71,23 +72,11 @@ public class MainActivity extends AppCompatActivity {
         });
         mViewPager.setCurrentItem(1);
 
-//        DatabaseHelper dbhelper = new DatabaseHelper(this);
-//        long id = dbhelper.insertValue("userIsVolunteer", "1");
-//        if (id <= 0) {
-//            Log.e("sdsd", " INSERTION FAIL");
-//        } else {
-//            Log.e("sdsd", " INSERTION SUCCESS");
-//        }
-//
-//        Log.e("should be 1", ""+dbhelper.getValue("userIsVolunteer"));
-//        dbhelper.updateValue("userIsVolunteer", "0");
-//        Log.e("should be 0", ""+dbhelper.getValue("userIsVolunteer"));
-
     }
 
     private void setTabLayoutBasedOnTypeUser() {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
-        if (dbHelper.getValue("userIsVolunteer") == "1") {
+        if (dbHelper.getValue("userIsVolunteer").equals("1")) {
             // set up volunteer account
             mTabLayout.getTabAt(0).setIcon(getDrawable(R.drawable.ic_home_black_24dp));
             mTabLayout.getTabAt(1).setIcon(getDrawable(R.drawable.ic_search_black_24dp));

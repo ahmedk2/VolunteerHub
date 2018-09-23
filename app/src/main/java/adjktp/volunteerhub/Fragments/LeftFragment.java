@@ -2,11 +2,18 @@ package adjktp.volunteerhub.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -15,10 +22,19 @@ import adjktp.volunteerhub.CustomObjectClasses.VolunteerOpportunity;
 import adjktp.volunteerhub.R;
 import adjktp.volunteerhub.SQLiteFiles.DatabaseHelper;
 
+import static android.content.ContentValues.TAG;
+
 public class LeftFragment extends Fragment {
 
-    //widgets
+    // widgets
     private View rootView;
+
+    // firebase widgets
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    // TODO: FIREBAEE USER
+    DatabaseReference pastEventsCompanyRef = db.getReference("Companies/applecomputers/past_events");
+    DatabaseReference futureEventsCompanyRef = db.getReference("Companies/applecomputers/past_events");
+    DatabaseReference opportunitiesRef = db.getReference("Opportunities");
 
     public LeftFragment() {
         // Required empty public constructor
@@ -34,12 +50,9 @@ public class LeftFragment extends Fragment {
         // find ouot user type
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
         if (dbHelper.getValue("userIsVolunteer") == "1") {
-            // make ui for volunteer
             //createUIForVolunteer()
             startListenersForVolunteer();
-
         }else {
-            // make ui for company
             createUIForCompany();
 
         }
@@ -58,6 +71,9 @@ public class LeftFragment extends Fragment {
                 ((ImageView) rootView.findViewById(R.id.btnPastEvents)).setAlpha(255);
 
                 ListView lvPastOpportunities = rootView.findViewById(R.id.lvPastOpportunitiesList);
+
+
+
 
                 // TODO: remove after testing
                 ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
@@ -95,18 +111,14 @@ public class LeftFragment extends Fragment {
                 ((ImageView) rootView.findViewById(R.id.btnPastEvents)).setImageAlpha(50);
                 ((ImageView) rootView.findViewById(R.id.btnFutureEvents)).setImageAlpha(255);
 
-                ListView lvPastOpportunities = rootView.findViewById(R.id.lvPastOpportunitiesList);
 
 
-                // TODO: remove after testing
-                ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
+//                // TODO: remove after testing
+//                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 0));
+//                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
+//                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
+//                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
 
-                VolunteerOpportunityAdapter volunteerOpportunityAdapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
-                lvPastOpportunities.setAdapter(volunteerOpportunityAdapter);
             }
         });
     }
@@ -116,20 +128,23 @@ public class LeftFragment extends Fragment {
         rootView.findViewById(R.id.btnAddNewEvents).setVisibility(View.GONE);
         rootView.findViewById(R.id.btnFutureEvents).setVisibility(View.GONE);
 
+        pastEventsCompanyRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<VolunteerOpportunity> vo = new ArrayList<>();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Log.e(TAG, "onDataChange: "+child.getValue());
+                    vo.add(child.getValue(VolunteerOpportunity.class));
+                }
+                ListView lv = rootView.findViewById(R.id.lvPastOpportunitiesList);
+                VolunteerOpportunityAdapter vd = new VolunteerOpportunityAdapter(getContext(), vo);
+                lv.setAdapter(vd);
+            }
 
-        ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
-        opportunities.add(new VolunteerOpportunity("Lg", "23/6/2019", 1, 132));
-        opportunities.add(new VolunteerOpportunity("Local Reading", "23/2/2019", 1, 9));
-        opportunities.add(new VolunteerOpportunity("Act", "23/9/2019", -1, 98));
-        opportunities.add(new VolunteerOpportunity("Local Reading", "23/2/2019", -1, 9));
-        opportunities.add(new VolunteerOpportunity("Act", "23/9/2019", 1, 98));
-        opportunities.add(new VolunteerOpportunity("Lg", "23/6/2019", 1, 132));
-        opportunities.add(new VolunteerOpportunity("Something iniovative", "23/10/2019", -1, 56));
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
-
-        ListView employerPastEvents = rootView.findViewById(R.id.lvPastOpportunitiesList);
-        VolunteerOpportunityAdapter adapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
-        employerPastEvents.setAdapter(adapter);
     }
 
 

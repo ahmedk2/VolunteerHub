@@ -4,11 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -18,10 +25,18 @@ import adjktp.volunteerhub.CustomObjectClasses.VolunteerOpportunity;
 import adjktp.volunteerhub.R;
 import adjktp.volunteerhub.SQLiteFiles.DatabaseHelper;
 
+import static android.content.ContentValues.TAG;
+
 public class MiddleFragment extends Fragment {
+
+
+    // firebase widgets
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference futureEventsCompanyRef = db.getReference("Companies/applecomputers/future_events");
 
     // widgets
     private View rootView;
+
 
     public MiddleFragment() {
         // Required empty public constructor
@@ -58,6 +73,23 @@ public class MiddleFragment extends Fragment {
             }
         });
 
+        futureEventsCompanyRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<VolunteerOpportunity> vo = new ArrayList<>();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Log.e(TAG, "onDataChange: "+child.getValue());
+                    vo.add(child.getValue(VolunteerOpportunity.class));
+                }
+                ListView lv = rootView.findViewById(R.id.lvPastOpportunitiesList);
+                VolunteerOpportunityAdapter vd = new VolunteerOpportunityAdapter(getContext(), vo);
+                lv.setAdapter(vd);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
 
         ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
         opportunities.add(new VolunteerOpportunity("Local Reading", "23/2/2019", 0, 9));
@@ -69,5 +101,7 @@ public class MiddleFragment extends Fragment {
         ListView employerPastEvents = rootView.findViewById(R.id.lvPastOpportunitiesList);
         VolunteerOpportunityAdapter adapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
         employerPastEvents.setAdapter(adapter);
+
+
     }
 }

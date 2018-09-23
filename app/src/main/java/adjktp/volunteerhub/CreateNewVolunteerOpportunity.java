@@ -60,7 +60,7 @@ public class CreateNewVolunteerOpportunity extends AppCompatActivity {
         opportunityRef.child(uuid).setValue(opportunity);
 
         // TODO: Change to acc username
-        companyRef.child("applecomputers/future_events").child(uuid).setValue(uuid);
+        companyRef.child("applecomputers/future_events").child(uuid).setValue(opportunity);
 
 
         finish();
