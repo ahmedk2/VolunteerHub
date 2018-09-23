@@ -9,7 +9,7 @@
     <LinearLayout
         android:paddingTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 
         <ImageView
@@ -17,10 +17,10 @@
             android:layout_margin="8dp"
             android:layout_width="75dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_past_events_black_24dp"
-            android:visibility="invisible"/>
+            android:src="@drawable/ic_past_events_black_24dp"/>
 
         <ImageView
+            android:id="@+id/btnAddNewEvents"
             android:layout_width="75dp"
             android:layout_height="50dp"
             android:visibility="visible"
@@ -32,8 +32,7 @@
             android:layout_margin="8dp"
             android:layout_width="70dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_future_events_black_24dp"
-            android:visibility="invisible"/>
+            android:src="@drawable/ic_future_events_black_24dp"/>
 
     </LinearLayout>
 

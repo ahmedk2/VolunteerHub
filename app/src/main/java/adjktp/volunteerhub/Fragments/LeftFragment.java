@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import adjktp.volunteerhub.Adapters.VolunteerOpportunityAdapter;
 import adjktp.volunteerhub.CustomObjectClasses.VolunteerOpportunity;
@@ -30,7 +29,7 @@ public class LeftFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_left, container, false);
+        rootView = inflater.inflate(R.layout.fragment_past_future_events, container, false);
 
         // find ouot user type
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
@@ -113,6 +112,11 @@ public class LeftFragment extends Fragment {
     }
 
     private void createUIForCompany() {
+        rootView.findViewById(R.id.btnPastEvents).setVisibility(View.GONE);
+        rootView.findViewById(R.id.btnAddNewEvents).setVisibility(View.GONE);
+        rootView.findViewById(R.id.btnFutureEvents).setVisibility(View.GONE);
+
+
         ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
         opportunities.add(new VolunteerOpportunity("Lg", "23/6/2019", 1, 132));
         opportunities.add(new VolunteerOpportunity("Local Reading", "23/2/2019", 1, 9));
