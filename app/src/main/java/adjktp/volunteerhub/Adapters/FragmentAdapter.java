@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import adjktp.volunteerhub.Fragments.LeftFragment;
+import adjktp.volunteerhub.Fragments.MiddleFragment;
 
 
 public class FragmentAdapter extends FragmentPagerAdapter {
@@ -20,7 +21,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new LeftFragment();
         } else if (position == 1) {
-            return new LeftFragment();
+            return new MiddleFragment();
 
         } else {
             return new LeftFragment();

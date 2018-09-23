@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import adjktp.volunteerhub.Adapters.VolunteerOpportunityAdapter;
 import adjktp.volunteerhub.CustomObjectClasses.VolunteerOpportunity;
 import adjktp.volunteerhub.R;
+import adjktp.volunteerhub.SQLiteFiles.DatabaseHelper;
 
 public class LeftFragment extends Fragment {
 
@@ -30,17 +32,25 @@ public class LeftFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_left, container, false);
 
+        // find ouot user type
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+        if (dbHelper.getValue("userIsVolunteer") == "1") {
+            // make ui for volunteer
+            //createUIForVolunteer()
+            startListenersForVolunteer();
 
+        }else {
+            // make ui for company
+            createUIForCompany();
 
+        }
 
-
-        startListeners();
         rootView.findViewById(R.id.btnPastEvents).callOnClick();
 
         return rootView;
     }
 
-    private void startListeners() {
+    private void startListenersForVolunteer() {
         // show past events
         rootView.findViewById(R.id.btnPastEvents).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,26 +62,26 @@ public class LeftFragment extends Fragment {
 
                 // TODO: remove after testing
                 ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", false));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", false));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", false));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", false));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", true));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
 
                 VolunteerOpportunityAdapter volunteerOpportunityAdapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
 
@@ -91,15 +101,31 @@ public class LeftFragment extends Fragment {
 
                 // TODO: remove after testing
                 ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", false));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", true));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", true));
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
 
                 VolunteerOpportunityAdapter volunteerOpportunityAdapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
                 lvPastOpportunities.setAdapter(volunteerOpportunityAdapter);
             }
         });
+    }
+
+    private void createUIForCompany() {
+        ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
+        opportunities.add(new VolunteerOpportunity("Lg", "23/6/2019", 1, 132));
+        opportunities.add(new VolunteerOpportunity("Local Reading", "23/2/2019", 1, 9));
+        opportunities.add(new VolunteerOpportunity("Act", "23/9/2019", -1, 98));
+        opportunities.add(new VolunteerOpportunity("Local Reading", "23/2/2019", -1, 9));
+        opportunities.add(new VolunteerOpportunity("Act", "23/9/2019", 1, 98));
+        opportunities.add(new VolunteerOpportunity("Lg", "23/6/2019", 1, 132));
+        opportunities.add(new VolunteerOpportunity("Something iniovative", "23/10/2019", -1, 56));
+
+
+        ListView employerPastEvents = rootView.findViewById(R.id.lvPastOpportunitiesList);
+        VolunteerOpportunityAdapter adapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
+        employerPastEvents.setAdapter(adapter);
     }
 
 

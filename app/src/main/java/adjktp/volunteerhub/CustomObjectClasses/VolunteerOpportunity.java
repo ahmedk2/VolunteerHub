@@ -2,13 +2,21 @@ package adjktp.volunteerhub.CustomObjectClasses;
 
 public class VolunteerOpportunity {
 
-    private String mPosition, mCompanyName, mLocation, mJobDescription, mDate;
+    private String mEventName, mPosition, mCompanyName, mLocation, mJobDescription, mDate;
     private double mDuration;
-    private boolean mAttended;
+    private int mAttended, mNumberOfAttendees;
+
+    /**
+     * date = dd/mm/yyyy
+     * location = 2323 some str, city, on, ca
+     * duration: x hours
+     * attended => -1: did not attend/event cancelled, 0: attending/hosting, 1: attended/hosted
+     */
 
     public VolunteerOpportunity() { }
 
-    public VolunteerOpportunity(String position, double duration, String date,String companyName, String location, String jobDescription, boolean attended) {
+    public VolunteerOpportunity(String eventName, String position, double duration, String date,String companyName, String location, String jobDescription, int attended, int numberOfAttendees) {
+        mEventName = eventName;
         mPosition = position;
         mDuration = duration;
         mDate = date;
@@ -16,17 +24,26 @@ public class VolunteerOpportunity {
         mLocation = location;
         mJobDescription = jobDescription;
         mAttended = attended;
+        mNumberOfAttendees = numberOfAttendees;
     }
 
     // TODO: remove after testing
-    public VolunteerOpportunity(String companyName, String position , String date, boolean attended) {
+    public VolunteerOpportunity(String companyName, String position , String date, int attended) {
         mCompanyName = companyName;
         mPosition = position;
         mDate = date;
         mAttended = attended;
     }
 
-    public String getmPosition() {
+    // TODO: remove after testing
+    public VolunteerOpportunity(String eventName, String date , int hosted, int numberOfAttendees) {
+        mEventName = eventName;
+        mDate = date;
+        mAttended = hosted;
+        mNumberOfAttendees = numberOfAttendees;
+    }
+
+    public String getPosition() {
         return mPosition;
     }
 
@@ -74,12 +91,28 @@ public class VolunteerOpportunity {
         this.mDuration = mDuration;
     }
 
-    public boolean getAttended() {
+    public int getAttended() {
         return mAttended;
     }
 
-    public void setAttended(boolean mAttended) {
+    public void setAttended(int mAttended) {
         this.mAttended = mAttended;
+    }
+
+    public void setEventName(String eventName) {
+        mEventName = eventName;
+    }
+
+    public String getEventName() {
+        return mEventName;
+    }
+
+    public void setNumberOfAttendees(int numberOfAttendees) {
+        mNumberOfAttendees = numberOfAttendees;
+    }
+
+    public int getNumberOfattendees() {
+        return mNumberOfAttendees;
     }
 }
 

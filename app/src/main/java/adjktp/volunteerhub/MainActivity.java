@@ -1,16 +1,13 @@
 package adjktp.volunteerhub;
 
-import android.database.sqlite.SQLiteConstraintException;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 
 import adjktp.volunteerhub.Adapters.FragmentAdapter;
 import adjktp.volunteerhub.SQLiteFiles.DatabaseHelper;
-import adjktp.volunteerhub.SQLiteFiles.LocalStorageDB;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.nav_bar);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.getTabAt(0).setIcon(getDrawable(R.drawable.ic_home_black_24dp));
-        mTabLayout.getTabAt(1).setIcon(getDrawable(R.drawable.ic_search_black_24dp));
-        mTabLayout.getTabAt(2).setIcon(getDrawable(R.drawable.ic_account_circle_black_24dp));
+        setTabLayoutBasedOnTypeUser();
+
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -71,20 +67,34 @@ public class MainActivity extends AppCompatActivity {
         });
         mViewPager.setCurrentItem(1);
 
-        DatabaseHelper dbhelper = new DatabaseHelper(this);
-        long id = dbhelper.insertValue("userIsVolunteer", "1");
-        if (id <= 0) {
-            Log.e("sdsd", " INSERTION FAIL");
-        } else {
-            Log.e("sdsd", " INSERTION SUCCESS");
-        }
-
-        Log.e("should be 1", ""+dbhelper.getValue("userIsVolunteer"));
-        dbhelper.updateValue("userIsVolunteer", "0");
-        Log.e("should be 0", ""+dbhelper.getValue("userIsVolunteer"));
+//        DatabaseHelper dbhelper = new DatabaseHelper(this);
+//        long id = dbhelper.insertValue("userIsVolunteer", "1");
+//        if (id <= 0) {
+//            Log.e("sdsd", " INSERTION FAIL");
+//        } else {
+//            Log.e("sdsd", " INSERTION SUCCESS");
+//        }
+//
+//        Log.e("should be 1", ""+dbhelper.getValue("userIsVolunteer"));
+//        dbhelper.updateValue("userIsVolunteer", "0");
+//        Log.e("should be 0", ""+dbhelper.getValue("userIsVolunteer"));
 
     }
 
+    private void setTabLayoutBasedOnTypeUser() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        if (dbHelper.getValue("userIsVolunteer") == "1") {
+            // set up volunteer account
+            mTabLayout.getTabAt(0).setIcon(getDrawable(R.drawable.ic_home_black_24dp));
+            mTabLayout.getTabAt(1).setIcon(getDrawable(R.drawable.ic_search_black_24dp));
+            mTabLayout.getTabAt(2).setIcon(getDrawable(R.drawable.ic_account_circle_black_24dp));
+        }else {
+            mTabLayout.getTabAt(0).setIcon(getDrawable(R.drawable.ic_past_events_black_24dp));
+            mTabLayout.getTabAt(1).setIcon(getDrawable(R.drawable.ic_future_events_black_24dp));
+            mTabLayout.getTabAt(2).setIcon(getDrawable(R.drawable.ic_account_circle_black_24dp));
+        }
+
+    }
 
 
 
