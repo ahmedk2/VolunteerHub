@@ -35,7 +35,7 @@ public class VolunteerOpportunityAdapter extends ArrayAdapter {
         }
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
-        if (dbHelper.getValue("userIsVolunteer") == "1") {
+        if (dbHelper.getValue("userIsVolunteer").equals("1")) {
             // set ui for volunteer
             // set ui elements
             ((TextView) convertView.findViewById(R.id.tvBigLeft)).setText(currentOpportunity.getCompanyName());

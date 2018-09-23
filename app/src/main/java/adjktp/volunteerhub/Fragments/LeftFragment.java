@@ -49,9 +49,9 @@ public class LeftFragment extends Fragment {
 
         // find ouot user type
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
-        if (dbHelper.getValue("userIsVolunteer") == "1") {
+        if (dbHelper.getValue("userIsVolunteer").equals("1")) {
             //createUIForVolunteer()
-            startListenersForVolunteer();
+            createUIForVolunteer();
         }else {
             createUIForCompany();
 
@@ -62,7 +62,13 @@ public class LeftFragment extends Fragment {
         return rootView;
     }
 
-    private void startListenersForVolunteer() {
+    private void createUIForVolunteer() {
+        // inflate old images
+        rootView.findViewById(R.id.btnPastEvents).setVisibility(View.VISIBLE);
+        rootView.findViewById(R.id.btnAddNewEvents).setVisibility(View.INVISIBLE);
+        rootView.findViewById(R.id.btnFutureEvents).setVisibility(View.VISIBLE);
+
+
         // show past events
         rootView.findViewById(R.id.btnPastEvents).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,30 +79,20 @@ public class LeftFragment extends Fragment {
                 ListView lvPastOpportunities = rootView.findViewById(R.id.lvPastOpportunitiesList);
 
 
-
-
                 // TODO: remove after testing
                 ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
                 opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helpngineer", "23/12/2017", 1));
                 opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 1));
                 opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
                 opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftwagineer", "23/12/2017", 0));
                 opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
                 opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftwagineer", "23/12/2017", 0));
                 opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
-                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 1));
-                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 1));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftwagineer", "23/12/2017", 0));
 
                 VolunteerOpportunityAdapter volunteerOpportunityAdapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
 
@@ -111,13 +107,18 @@ public class LeftFragment extends Fragment {
                 ((ImageView) rootView.findViewById(R.id.btnPastEvents)).setImageAlpha(50);
                 ((ImageView) rootView.findViewById(R.id.btnFutureEvents)).setImageAlpha(255);
 
+                ArrayList<VolunteerOpportunity> opportunities = new ArrayList<>();
+               // TODO: remove after testing
+                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helpngineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
+                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
+                VolunteerOpportunityAdapter volunteerOpportunityAdapter = new VolunteerOpportunityAdapter(getContext(), opportunities);
+                ListView lvPastOpportunities = rootView.findViewById(R.id.lvPastOpportunitiesList);
+                lvPastOpportunities.setAdapter(volunteerOpportunityAdapter);
 
 
-//                // TODO: remove after testing
-//                opportunities.add(new VolunteerOpportunity("Thomas Cook", "Helper Engineer", "23/12/2017", 0));
-//                opportunities.add(new VolunteerOpportunity("Burlington", "Engineer", "23/12/2017", 0));
-//                opportunities.add(new VolunteerOpportunity("Humber", "SOftware Engineer", "23/12/2017", 0));
-//                opportunities.add(new VolunteerOpportunity("Thomas Tuc", "Something ", "23/12/2017", 0));
+
 
             }
         });
@@ -133,7 +134,7 @@ public class LeftFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<VolunteerOpportunity> vo = new ArrayList<>();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Log.e(TAG, "onDataChange: "+child.getValue());
+//                    Log.e(TAG, "onDataChange: "+child.getValue());
                     vo.add(child.getValue(VolunteerOpportunity.class));
                 }
                 ListView lv = rootView.findViewById(R.id.lvPastOpportunitiesList);

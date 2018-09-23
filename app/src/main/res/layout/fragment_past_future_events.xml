@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/btnPastEvents"
             android:layout_margin="8dp"
-            android:layout_width="75dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_past_events_black_24dp"/>
 
@@ -30,7 +30,7 @@
         <ImageView
             android:id="@+id/btnFutureEvents"
             android:layout_margin="8dp"
-            android:layout_width="70dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_future_events_black_24dp"/>
 

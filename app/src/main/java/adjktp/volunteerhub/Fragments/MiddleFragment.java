@@ -48,9 +48,9 @@ public class MiddleFragment extends Fragment {
         rootView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_past_future_events, container, false);
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
-        if (dbHelper.getValue("userIsVolunteer") == "1") {
+        if (dbHelper.getValue("userIsVolunteer").equals("1")) {
             // design ui for volunteer
-
+            createUIForVolunteer();
 
         } else {
             // design ui for company: pull in future events
@@ -60,9 +60,15 @@ public class MiddleFragment extends Fragment {
         return rootView;
     }
 
-    private void createUIForCompany() {
+    private void createUIForVolunteer() {
         rootView.findViewById(R.id.btnPastEvents).setVisibility(View.GONE);
+        rootView.findViewById(R.id.btnAddNewEvents).setVisibility(View.GONE);
         rootView.findViewById(R.id.btnFutureEvents).setVisibility(View.GONE);
+    }
+
+    private void createUIForCompany() {
+        rootView.findViewById(R.id.btnPastEvents).setVisibility(View.INVISIBLE);
+        rootView.findViewById(R.id.btnFutureEvents).setVisibility(View.INVISIBLE);
 
         // listener for creating new opportunities
         ((ImageView) rootView.findViewById(R.id.btnAddNewEvents)).setOnClickListener(new View.OnClickListener() {
@@ -104,4 +110,5 @@ public class MiddleFragment extends Fragment {
 
 
     }
+
 }
